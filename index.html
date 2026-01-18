@@ -179,7 +179,7 @@
 
     <div id="cursor-circle"></div>
 
-    <nav class="fixed w-full z-50 bg-[#020410]/90 backdrop-blur-md border-b border-white/10 text-white transition-all duration-300">
+    <nav id="main-nav" class="fixed w-full z-50 bg-transparent border-b border-transparent text-white transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <a href="#" class="flex items-center gap-2 group">
@@ -376,7 +376,7 @@
         </div>
     </section>
 
-    <section id="contact" class="py-24 bg-white relative z-20 border-t border-slate-200">
+    <section id="contact" class="py-24 bg-slate-50 relative z-20 border-t border-slate-200">
         <div class="max-w-4xl mx-auto px-4 text-center">
             <h3 class="text-4xl font-bold text-slate-900 mb-6">Let's Connect</h3>
             <p class="text-slate-500 mb-10 text-xl max-w-2xl mx-auto">
@@ -394,6 +394,18 @@
     </section>
 
     <script>
+        // --- NAV SCROLL EFFECT ---
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.remove('bg-transparent', 'border-transparent');
+                nav.classList.add('bg-[#020410]/90', 'backdrop-blur-md', 'border-white/10');
+            } else {
+                nav.classList.add('bg-transparent', 'border-transparent');
+                nav.classList.remove('bg-[#020410]/90', 'backdrop-blur-md', 'border-white/10');
+            }
+        });
+
         // --- CUSTOM CURSOR ---
         const cursorCircle = document.getElementById('cursor-circle');
 
@@ -410,17 +422,14 @@
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             
-            // Move the gradient via CSS variables
             skillsSection.style.setProperty('--mouse-x', `${x}px`);
             skillsSection.style.setProperty('--mouse-y', `${y}px`);
             
-            // Turn cursor purple
-            cursorCircle.style.borderColor = '#a855f7'; // Purple
+            cursorCircle.style.borderColor = '#a855f7'; // Purple cursor
         });
         
         skillsSection.addEventListener('mouseleave', () => {
-            // Reset cursor to blue
-            cursorCircle.style.borderColor = '#2563eb';
+            cursorCircle.style.borderColor = '#2563eb'; // Blue cursor
         });
 
         // --- HERO CANVAS PARTICLES ---
